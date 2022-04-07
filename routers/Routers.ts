@@ -2,16 +2,16 @@
 import { opine, json, Router } from "https://deno.land/x/opine@2.1.5/mod.ts";
 
 //@ts-ignore
-import {Flight} from '../models/Flight.ts';
+import {Flight} from '../model/Flight.ts';
 //@ts-ignore
 import { readAll } from "https://deno.land/std/streams/conversion.ts";
 
 
- export const flights = Router();
+
  export const appFlight = opine();
 
 
-flights.get("/", async function(req, res) {
+ appFlight.get("/flight", async function(req, res) {
      try {
         const flights = await Flight.all()
          res.json(flights)
@@ -21,10 +21,9 @@ flights.get("/", async function(req, res) {
      }     
 });
 
-flights.get("/:id", async function(req, res) {
+appFlight.get("/flight/:id", async function(req, res) {
 
     const id = req.params.id;
-    console.log(id)
 
     try {
         const flight = await Flight.where('id', req.params.id).first()
@@ -44,9 +43,8 @@ flights.get("/:id", async function(req, res) {
 
 appFlight.use(json());
 
-appFlight.post('/',  function(req, res) {
-    const name = req.body;
-    console.log(name)
+appFlight.post('/flight',  function(req, res) {
+    
     const flight =  Flight.create(req.body) 
     try {
         res.setStatus(200).json(req.body)
@@ -59,10 +57,10 @@ appFlight.post('/',  function(req, res) {
 
 
 
-appFlight.put("/:id", async function(req, res) {
+appFlight.put("/flight/:id", async function(req, res) {
 
     const body = req.body
-    //console.log(body)
+    
     try {
         const flight = await Flight.where('id', req.params.id).first()
 
@@ -79,10 +77,10 @@ appFlight.put("/:id", async function(req, res) {
       
     }
 });
-flights.delete("/:id", async function(req, res) {
+appFlight.delete("/flight/:id", async function(req, res) {
 
     const id = req.params.id;
-    console.log(id)
+    
 
     try {
         const flight = await Flight.where('id', req.params.id).first()

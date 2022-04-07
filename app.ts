@@ -1,20 +1,20 @@
 //@ts-ignore
-import { opine, Router } from "https://deno.land/x/opine@2.1.5/mod.ts";
+import { opine} from "https://deno.land/x/opine@2.1.5/mod.ts";
 //@ts-ignore
 import { db } from "./db.ts";
 //@ts-ignore
-import {flights, appFlight} from "./router/flightRouter.ts"
+import {appFlight} from "./routers/Routers.ts"
 
 const app = opine();
-const router = Router()
+
 
 const PORT = 3000;
 
-app.get("/", function(req, res) {
+app.get("/home", function(req, res) {
     res.send("Hello, welcome to Flights Airlines. ")
 });
-app.use("/all", flights);
-app.use("/new", appFlight);
+
+app.use("/", appFlight);
 
 
 await db.sync()

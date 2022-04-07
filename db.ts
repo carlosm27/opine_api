@@ -1,7 +1,7 @@
 //@ts-ignore
 import { Database, SQLite3Connector } from 'https://deno.land/x/denodb/mod.ts';
 //@ts-ignore
-import {Business} from './model/Flight.ts';
+import {Flight} from './model/Flight.ts';
 
 
 const connector = new SQLite3Connector({
@@ -10,7 +10,7 @@ const connector = new SQLite3Connector({
   
 export const db = new Database(connector);
 
-db.link([Business])
+db.link([Flight])
 
 
 

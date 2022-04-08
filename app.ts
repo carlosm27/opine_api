@@ -21,4 +21,4 @@ await db.sync()
 
 app.listen(PORT)
 
-console.log(`https:\\localhost: ${PORT}`);
+console.log(`https://localhost:${PORT}`)
